@@ -1,0 +1,4 @@
+App\Entity\Payment:
+     attributes:
+         id:
+             groups: ["payment"]   
