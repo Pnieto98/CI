@@ -22,11 +22,6 @@ class PaymentMethod
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $payments;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
     private $method_name;
 
     public function __construct()

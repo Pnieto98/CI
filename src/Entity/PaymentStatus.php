@@ -23,11 +23,7 @@ class PaymentStatus
      * @ORM\Column(type="string", length=100)
      */
     private $status;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Payment::class, mappedBy="payment_status")
-     */
-    private $payments;
+    
 
     public function __construct()
     {

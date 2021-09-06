@@ -47,4 +47,22 @@ class PaymentRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findPaymentBySomeField(array $fields)
+    {
+        $qb = $this->createQueryBuilder("p");
+        if (isset($fields["company"])) {
+            $qb->where("p.company = :val")
+                ->setParameter("val", $fields["company"]);
+        }
+        if (isset($fields["payment_date_from"])) {
+            $qb->where("p.payment_date >= :val")
+                ->setParameter("val", $fields["payment_date_from"]);
+        }
+        if (isset($fields["payment_date_until"])) {
+            $qb->where("p.payment_date <= :val")
+                ->setParameter("val", $fields["payment_date_until"]);
+        }
+        return $qb->orderBy("p.id", "asc")
+        ->getQuery()->getResult();
+    }
 }

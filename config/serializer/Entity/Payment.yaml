@@ -2,3 +2,18 @@ App\Entity\Payment:
      attributes:
          id:
              groups: ["payment"]   
+         payment_date:
+             groups: ["payment"]     
+         company:
+             groups: ["payment"]  
+         amount:
+             groups: ["payment"]  
+         external_reference:
+             groups: ["payment"]  
+         terminal:
+             groups: ["payment"]  
+         payment:
+             groups: ["payment"]
+         status:
+             groups: ["payment"]      
+              

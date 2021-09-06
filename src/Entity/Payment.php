@@ -59,6 +59,11 @@ class Payment
      */
     private $reference;
 
+    private $status;
+
+    private $payment;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +95,14 @@ class Payment
 
     public function getAmount(): ?float
     {
+        #SI EL MONTO VIENE CON DECIMALES LO EXPLOTO Y FORMATEO 
+        if(strpos((string)$this->amount, ".") == true){
+            $number_array = explode(".", (string)$this->amount);
+            $decimal = strlen($number_array[1]) <= 1 ? $number_array[1]."0" : $number_array[1];
+            $this->amount = $number_array[0].$decimal;
+        }else{
+            $this->amount = str_pad($this->amount, strlen($this->amount)+2, "0", STR_PAD_RIGHT);#SI EL MONTO VIENE SIN DECIMALES LE AGREGO 2 CEROS AL FINAL
+        }
         return $this->amount;
     }
 
@@ -126,7 +139,7 @@ class Payment
 
     public function getPaymentMethod(): ?PaymentMethod
     {
-        return $this->payment_method;
+        return $this->payment_method->getMethodName();
     }
 
     public function setPaymentMethod(?PaymentMethod $payment_method): self
@@ -159,4 +172,16 @@ class Payment
 
         return $this;
     }
+
+    public function getPayment(): ?string
+    {
+        return $this->payment = $this->payment_method->getMethodName();
+    }
+    public function getStatus(): ?string
+    {
+        return $this->status = $this->payment_status->getStatus();
+    }
+ 
+
+
 }
